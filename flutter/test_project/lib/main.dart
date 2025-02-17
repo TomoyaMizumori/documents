@@ -108,7 +108,7 @@ class MyHomePage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    title: Text('${element}${weekday}'),
+                    title: Text('${weekday} ${element.month}/${element.day}'),
                     subtitle: const Text('schedule:'),
                   );
                 } else {
@@ -118,7 +118,7 @@ class MyHomePage extends StatelessWidget {
                       size: 60,
                       color: Colors.blue,
                     ),
-                    title: Text('${element}${weekday}'),
+                    title: Text('${weekday} ${element.month}/${element.day}'),
                     subtitle: const Text('schedule:'),
                   );
                 }

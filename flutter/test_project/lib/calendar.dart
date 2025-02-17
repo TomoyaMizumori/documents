@@ -28,19 +28,19 @@ List makeDateList() {
 String weekdayFunction(int weekday) {
   switch (weekday % 7) {
     case 0:
-      return 'Monday';
+      return 'Mon';
     case 1:
-      return 'Tuesday';
+      return 'Tue';
     case 2:
-      return 'Wednesday';
+      return 'Wed';
     case 3:
-      return 'Thursday';
+      return 'Thur';
     case 4:
-      return 'Friday';
+      return 'Fri';
     case 5:
-      return 'Saturday';
+      return 'Sat';
     case 6:
-      return 'Sunday';
+      return 'Sun';
     default:
       return 'error';
   }
