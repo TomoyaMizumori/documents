@@ -90,6 +90,7 @@ class MyHomePage extends StatelessWidget {
               itemCount: dateList.length,
               itemBuilder: (context, index) {
                 final element = dateList[index];
+                final weekday = weekdayFunction(index);
                 if (index == 0) {
                   return ListTile(
                     leading: Container(
@@ -107,7 +108,7 @@ class MyHomePage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    title: Text('${element}'),
+                    title: Text('${element}${weekday}'),
                     subtitle: const Text('schedule:'),
                   );
                 } else {
@@ -117,7 +118,7 @@ class MyHomePage extends StatelessWidget {
                       size: 60,
                       color: Colors.blue,
                     ),
-                    title: Text('${element}'),
+                    title: Text('${element}${weekday}'),
                     subtitle: const Text('schedule:'),
                   );
                 }
