@@ -91,6 +91,13 @@ class MyHomePage extends StatelessWidget {
               itemBuilder: (context, index) {
                 final element = dateList[index];
                 final weekday = weekdayFunction(index);
+                var textColor = Colors.black;
+                if (weekday == 'Sat') {
+                  textColor = Colors.blue;
+                }
+                if (weekday == 'Sun') {
+                  textColor = Colors.red;
+                }
                 if (index == 0) {
                   return ListTile(
                     leading: Container(
@@ -108,7 +115,10 @@ class MyHomePage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    title: Text('${weekday} ${element.month}/${element.day}'),
+                    title: Text(
+                      '${weekday} ${element.month}/${element.day}',
+                      style: TextStyle(color: textColor),
+                    ),
                     subtitle: const Text('schedule:'),
                   );
                 } else {
@@ -118,7 +128,10 @@ class MyHomePage extends StatelessWidget {
                       size: 60,
                       color: Colors.blue,
                     ),
-                    title: Text('${weekday} ${element.month}/${element.day}'),
+                    title: Text(
+                      '${weekday} ${element.month}/${element.day}',
+                      style: TextStyle(color: textColor),
+                    ),
                     subtitle: const Text('schedule:'),
                   );
                 }
