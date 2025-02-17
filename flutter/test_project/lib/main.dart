@@ -90,15 +90,37 @@ class MyHomePage extends StatelessWidget {
               itemCount: dateList.length,
               itemBuilder: (context, index) {
                 final element = dateList[index];
-                return ListTile(
-                  leading: const Icon(
-                    Icons.arrow_forward,
-                    size: 30,
-                    color: Colors.blue,
-                  ),
-                  title: Text('${element}'),
-                  subtitle: const Text('schedule:'),
-                );
+                if (index == 0) {
+                  return ListTile(
+                    leading: Container(
+                      width: 60,
+                      height: 60,
+                      decoration: const BoxDecoration(
+                          shape: BoxShape.circle, color: Colors.green),
+                      child: const Center(
+                        child: Text(
+                          'Today',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16,
+                              color: Colors.white),
+                        ),
+                      ),
+                    ),
+                    title: Text('${element}'),
+                    subtitle: const Text('schedule:'),
+                  );
+                } else {
+                  return ListTile(
+                    leading: const Icon(
+                      Icons.arrow_forward,
+                      size: 60,
+                      color: Colors.blue,
+                    ),
+                    title: Text('${element}'),
+                    subtitle: const Text('schedule:'),
+                  );
+                }
               },
             ))
           ],
