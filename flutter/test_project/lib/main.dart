@@ -115,6 +115,8 @@ class MyHomePage extends StatelessWidget {
                         ),
                       ),
                     ),
+                    onTap: () =>
+                        debugPrint('selected ${element.month}/${element.day}'),
                     title: Text(
                       '${weekday} ${element.month}/${element.day}',
                       style: TextStyle(color: textColor),
@@ -133,6 +135,8 @@ class MyHomePage extends StatelessWidget {
                       style: TextStyle(color: textColor),
                     ),
                     subtitle: const Text('schedule:'),
+                    onTap: () =>
+                        debugPrint('selected ${element.month}/${element.day}'),
                   );
                 }
               },
