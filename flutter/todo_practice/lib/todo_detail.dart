@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 
-class TodoDetail extends StatefulWidget {
-  const TodoDetail({super.key});
-
-  @override
-  // ignore: library_private_types_in_public_api
-  _TodoDetail createState() => _TodoDetail();
-}
-
-class _TodoDetail extends State<TodoDetail> {
-  final formKey = GlobalKey<FormState>();
-  Map<String, String> formValue = {};
+class TodoDetail extends StatelessWidget {
+  final int? index;
+  final String? title;
+  final String? content;
+  final bool? isCompleted;
+  const TodoDetail(
+      {super.key, this.index, this.title, this.content, this.isCompleted});
 
   @override
   Widget build(BuildContext context) {
@@ -23,40 +19,34 @@ class _TodoDetail extends State<TodoDetail> {
         backgroundColor: Colors.blue,
       ),
       body: Form(
-          key: formKey,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: TextFormField(
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'フォーム１',
-                  ),
-                  onSaved: (value) => {formValue['form1'] = value.toString()},
-                ),
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: TextFormField(
+              decoration: InputDecoration(
+                border: const OutlineInputBorder(),
+                labelText: 'タイトル$index',
               ),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: TextFormField(
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'フォーム2',
-                  ),
-                  onSaved: (value) => {formValue['form2'] = value.toString()},
-                ),
+              onSaved: (value) => {},
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: TextFormField(
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: '内容',
               ),
-            ],
-          )),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          formKey.currentState?.save();
-          setState(() {});
-        },
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
+              onSaved: (value) => {},
+            ),
+          ),
+          ElevatedButton(
+              onPressed: () {},
+              child: isCompleted! ? const Text('未完了にする') : const Text('完了にする'))
+        ],
+      )),
     );
   }
 }

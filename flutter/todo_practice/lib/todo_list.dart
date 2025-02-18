@@ -60,7 +60,11 @@ class _TodoList extends State<TodoList> {
                     }),
                 onTap: () => Navigator.of(context)
                     .push(MaterialPageRoute(builder: (context) {
-                  return const TodoDetail();
+                  return TodoDetail(
+                      index: index,
+                      title: element.title,
+                      content: element.content,
+                      isCompleted: element.isCompleted);
                 })),
               );
             },
