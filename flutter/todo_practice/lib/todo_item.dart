@@ -1,10 +1,16 @@
 class TodoItem {
-  String id;
-  String title;
-  String content;
+  final int id;
+  final String title;
+  final String content;
   bool isCompleted;
 
-  TodoItem(this.id, this.title, this.content, {this.isCompleted = false});
+  // ignore: avoid_positional_boolean_parameters
+  TodoItem({
+    required this.id,
+    required this.title,
+    required this.content,
+    required this.isCompleted,
+  });
 
   void toggleIsCompleted() {
     isCompleted = !isCompleted;
