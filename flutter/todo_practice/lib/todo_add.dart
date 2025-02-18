@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 
 class TodoAdd extends StatefulWidget {
-  const TodoAdd({super.key});
+  final void Function(Map<String, String>) addTodoItem;
+  const TodoAdd({super.key, required this.addTodoItem});
 
   @override
   // ignore: library_private_types_in_public_api
-  _TodoAdd createState() => _TodoAdd();
+  State<TodoAdd> createState() => _TodoAdd();
 }
 
 class _TodoAdd extends State<TodoAdd> {
   final formKey = GlobalKey<FormState>();
+
   Map<String, String> formValue = {};
 
   @override
@@ -23,53 +25,59 @@ class _TodoAdd extends State<TodoAdd> {
         backgroundColor: Colors.blue,
       ),
       body: Form(
+          key: formKey,
           child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: TextFormField(
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'タイトル',
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: TextFormField(
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'タイトル',
+                  ),
+                  onSaved: (value) => {formValue['title'] = value.toString()},
+                  validator: (value) {
+                    if (value == null) {
+                      return '必須項目です';
+                    } else if (value.isEmpty) {
+                      return '必須項目です';
+                    } else if (value.length > 30) {
+                      return 'タイトルは30文字以内です';
+                    }
+                    return null;
+                  },
+                ),
               ),
-              onSaved: (value) => {},
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return '必須項目です';
-                } else if (value.length > 30) {
-                  return 'タイトルは30文字以内です';
-                }
-                return null;
-              },
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: TextFormField(
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: '内容',
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: TextFormField(
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: '内容',
+                  ),
+                  onSaved: (value) => {formValue['content'] = value.toString()},
+                  validator: (value) {
+                    if (value == null) {
+                      return '必須項目です';
+                    } else if (value.isEmpty) {
+                      return '必須項目です';
+                    }
+                    return null;
+                  },
+                ),
               ),
-              onSaved: (value) => {},
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return '必須項目です';
-                }
-                return null;
-              },
-            ),
-          ),
-          ElevatedButton(
-              onPressed: () {
-                if (formKey.currentState!.validate()) {
-                  formKey.currentState?.save();
-                  Navigator.of(context).pop();
-                }
-              },
-              child: const Text('追加する'))
-        ],
-      )),
+              ElevatedButton(
+                  onPressed: () {
+                    if (formKey.currentState!.validate()) {
+                      formKey.currentState?.save();
+                      widget.addTodoItem(formValue);
+                      Navigator.of(context).pop();
+                    }
+                  },
+                  child: const Text('追加する'))
+            ],
+          )),
     );
   }
 }
