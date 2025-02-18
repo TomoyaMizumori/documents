@@ -38,8 +38,7 @@ class _TodoList extends State<TodoList> {
             itemBuilder: (context, index) {
               final element = viewList[index];
               return ListTile(
-                title: Text('${index + 1}'),
-                subtitle: Text(element.title),
+                title: Text('${index + 1}  ${element.title}'),
                 trailing: Checkbox(
                     activeColor: Colors.green,
                     value: element.isCompleted,
