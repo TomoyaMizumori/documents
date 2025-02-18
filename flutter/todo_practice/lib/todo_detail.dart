@@ -31,6 +31,7 @@ class TodoDetail extends StatelessWidget {
               ),
               initialValue: title,
               onSaved: (value) => {},
+              readOnly: true,
             ),
           ),
           Padding(
@@ -42,6 +43,7 @@ class TodoDetail extends StatelessWidget {
               ),
               initialValue: content,
               onSaved: (value) => {},
+              readOnly: true,
             ),
           ),
           ElevatedButton(
