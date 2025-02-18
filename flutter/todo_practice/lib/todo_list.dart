@@ -27,7 +27,6 @@ class _TodoList extends State<TodoList> {
   ];
 
   void switchTodoItem(int index) {
-    debugPrint('aaaaaaaaaaaaaaaaaaaaaaaaaaa');
     setState(() {
       final selectedItem = viewList[index];
       selectedItem.isCompleted = !selectedItem.isCompleted;
