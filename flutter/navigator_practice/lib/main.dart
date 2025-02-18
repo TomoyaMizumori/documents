@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:navigator_practice/detail_page.dart';
 import 'package:navigator_practice/first_page.dart';
+import 'package:navigator_practice/list_page.dart';
 import 'package:navigator_practice/second_page.dart';
 
 void main() {
@@ -18,10 +20,12 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const FirstPage(),
+      home: MyList(),
       routes: <String, WidgetBuilder>{
         'first': (context) => const FirstPage(),
         'second': (context) => const SecondPage(),
+        'list': (context) => MyList(),
+        'detail': (context) => MyDetail(),
       },
     );
   }
