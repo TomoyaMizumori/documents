@@ -25,10 +25,11 @@ class TodoDetail extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: TextFormField(
-              decoration: InputDecoration(
-                border: const OutlineInputBorder(),
-                labelText: 'タイトル$index',
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'タイトル',
               ),
+              initialValue: title,
               onSaved: (value) => {},
             ),
           ),
@@ -39,6 +40,7 @@ class TodoDetail extends StatelessWidget {
                 border: OutlineInputBorder(),
                 labelText: '内容',
               ),
+              initialValue: content,
               onSaved: (value) => {},
             ),
           ),
