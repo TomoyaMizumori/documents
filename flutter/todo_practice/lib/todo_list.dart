@@ -58,9 +58,7 @@ class _TodoList extends State<TodoList> {
       appBar: AppBar(
         title: Text(
           'TODO一覧(完了済み${completedList.length}/${unCompletedList.length + completedList.length})',
-          style: const TextStyle(color: Colors.white),
         ),
-        backgroundColor: Colors.blue,
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
