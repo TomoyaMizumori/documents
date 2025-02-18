@@ -112,6 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
+            const FavoriteWidget(),
           ],
         ),
       ),
@@ -120,6 +121,80 @@ class _MyHomePageState extends State<MyHomePage> {
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+}
+
+class FavoriteWidget extends StatefulWidget {
+  final String msg;
+
+  const FavoriteWidget({super.key, this.msg = 'my favorite'});
+
+  @override
+  // ignore: library_private_types_in_public_api
+  _FavoriteWidgetState createState() => _FavoriteWidgetState();
+}
+
+class _FavoriteWidgetState extends State<FavoriteWidget> {
+  bool _isFavorite = false;
+
+  @override
+  void initState() {
+    debugPrint('Call initState');
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    debugPrint('call build');
+    debugPrint('FavoriteWidget message: ${widget.msg}');
+    return IconButton(
+      padding: const EdgeInsets.all(0),
+      alignment: Alignment.center,
+      icon: (_isFavorite
+          ? const Icon(Icons.star)
+          : const Icon(Icons.star_border)),
+      color: Colors.red[500],
+      onPressed: _toggleFavorite,
+    );
+  }
+
+  void _toggleFavorite() {
+    setState(
+      () {
+        debugPrint('call setState');
+        _isFavorite = !_isFavorite;
+        toAnotherPage();
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    debugPrint('call dispose');
+    super.dispose();
+  }
+
+  void toAnotherPage() async {
+    {
+      await Navigator.of(context)
+          .pushReplacement(MaterialPageRoute(builder: (context) {
+        return const AnotherPage();
+      }));
+    }
+  }
+}
+
+class AnotherPage extends StatelessWidget {
+  const AnotherPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Another Page'),
+      ),
+      body: const Text('another page'),
     );
   }
 }
