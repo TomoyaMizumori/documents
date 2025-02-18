@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_practice/todo_add.dart';
 import 'package:todo_practice/todo_detail.dart';
 import 'package:todo_practice/todo_item.dart';
 
@@ -85,7 +86,10 @@ class _TodoList extends State<TodoList> {
         currentIndex: bottomIndex,
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => debugPrint('新規TODO作成'), //TODO navigator push使う
+        onPressed: () =>
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+          return const TodoAdd();
+        })),
         shape: const CircleBorder(),
         child: const Icon(Icons.add),
       ),
