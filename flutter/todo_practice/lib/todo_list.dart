@@ -28,6 +28,11 @@ class _TodoList extends State<TodoList> {
         },
         currentIndex: bottomIndex,
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => debugPrint('新規TODO作成'),
+        shape: const CircleBorder(),
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }
