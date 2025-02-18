@@ -43,15 +43,10 @@ class _TodoList extends State<TodoList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: bottomIndex == 0
-            ? const Text(
-                'TODO一覧(未完了)',
-                style: TextStyle(color: Colors.white),
-              )
-            : const Text(
-                'TODO一覧(完了)',
-                style: TextStyle(color: Colors.white),
-              ),
+        title: Text(
+          'TODO一覧(完了済み${completedList.length}/${unCompletedList.length + completedList.length})',
+          style: const TextStyle(color: Colors.white),
+        ),
         backgroundColor: Colors.blue,
       ),
       body: Column(
