@@ -19,10 +19,25 @@ class _TodoList extends State<TodoList> {
 
   final List<TodoItem> unCompletedList = [
     TodoItem(id: 0, title: '課題', content: '期末課題提出', isCompleted: false),
+    TodoItem(id: 1, title: '掃除', content: '風呂掃除', isCompleted: false),
   ];
   final List<TodoItem> completedList = [
-    TodoItem(id: 1, title: '掃除', content: '風呂掃除', isCompleted: true),
+    TodoItem(id: 2, title: '病院', content: '毎週の通院', isCompleted: true),
+    TodoItem(id: 3, title: '免許', content: '免許更新', isCompleted: true),
   ];
+
+  void switchTodoItem(int index) {
+    setState(() {
+      final selectedItem = viewList[index];
+      if (selectedItem.isCompleted) {
+        unCompletedList.removeAt(index = index);
+        completedList.add(selectedItem);
+      } else {
+        completedList.removeAt(index = index);
+        unCompletedList.add(selectedItem);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +63,7 @@ class _TodoList extends State<TodoList> {
             itemBuilder: (context, index) {
               final element = viewList[index];
               return ListTile(
-                title: Text('${index + 1}  ${element.title}'),
+                title: Text('${element.id + 1}  ${element.title}'),
                 trailing: Checkbox(
                     activeColor: Colors.green,
                     value: element.isCompleted,
@@ -56,6 +71,7 @@ class _TodoList extends State<TodoList> {
                       setState(
                         () {
                           element.isCompleted = !element.isCompleted;
+                          switchTodoItem(index);
                         },
                       );
                     }),
