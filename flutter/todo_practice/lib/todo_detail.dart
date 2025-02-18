@@ -22,9 +22,7 @@ class TodoDetail extends StatelessWidget {
       appBar: AppBar(
         title: const Text(
           'Todo詳細',
-          style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: Colors.blue,
       ),
       body: Form(
           child: Column(

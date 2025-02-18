@@ -20,9 +20,7 @@ class _TodoAdd extends State<TodoAdd> {
       appBar: AppBar(
         title: const Text(
           'Todoを追加',
-          style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: Colors.blue,
       ),
       body: Form(
           key: formKey,
