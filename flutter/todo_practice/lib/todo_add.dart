@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
 
-class TodoAdd extends StatelessWidget {
+class TodoAdd extends StatefulWidget {
   const TodoAdd({super.key});
+
+  @override
+  // ignore: library_private_types_in_public_api
+  _TodoAdd createState() => _TodoAdd();
+}
+
+class _TodoAdd extends State<TodoAdd> {
+  final formKey = GlobalKey<FormState>();
+  Map<String, String> formValue = {};
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +34,14 @@ class TodoAdd extends StatelessWidget {
                 labelText: 'タイトル',
               ),
               onSaved: (value) => {},
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return '必須項目です';
+                } else if (value.length > 30) {
+                  return 'タイトルは30文字以内です';
+                }
+                return null;
+              },
             ),
           ),
           Padding(
@@ -35,9 +52,22 @@ class TodoAdd extends StatelessWidget {
                 labelText: '内容',
               ),
               onSaved: (value) => {},
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return '必須項目です';
+                }
+                return null;
+              },
             ),
           ),
-          ElevatedButton(onPressed: () {}, child: const Text('追加する'))
+          ElevatedButton(
+              onPressed: () {
+                if (formKey.currentState!.validate()) {
+                  formKey.currentState?.save();
+                  Navigator.of(context).pop();
+                }
+              },
+              child: const Text('追加する'))
         ],
       )),
     );
