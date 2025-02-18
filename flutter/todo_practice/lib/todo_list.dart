@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_practice/todo_detail.dart';
 import 'package:todo_practice/todo_item.dart';
 
 class TodoList extends StatefulWidget {
@@ -26,9 +27,17 @@ class _TodoList extends State<TodoList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: bottomIndex == 0
-              ? const Text('TODO一覧(未完了)')
-              : const Text('TODO一覧(完了)')),
+        title: bottomIndex == 0
+            ? const Text(
+                'TODO一覧(未完了)',
+                style: TextStyle(color: Colors.white),
+              )
+            : const Text(
+                'TODO一覧(完了)',
+                style: TextStyle(color: Colors.white),
+              ),
+        backgroundColor: Colors.blue,
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -49,6 +58,10 @@ class _TodoList extends State<TodoList> {
                         },
                       );
                     }),
+                onTap: () => Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) {
+                  return const TodoDetail();
+                })),
               );
             },
           ))
