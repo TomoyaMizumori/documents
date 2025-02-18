@@ -27,8 +27,10 @@ class _TodoList extends State<TodoList> {
   ];
 
   void switchTodoItem(int index) {
+    debugPrint('aaaaaaaaaaaaaaaaaaaaaaaaaaa');
     setState(() {
       final selectedItem = viewList[index];
+      selectedItem.isCompleted = !selectedItem.isCompleted;
       if (selectedItem.isCompleted) {
         unCompletedList.removeAt(index = index);
         completedList.add(selectedItem);
@@ -37,6 +39,18 @@ class _TodoList extends State<TodoList> {
         unCompletedList.add(selectedItem);
       }
     });
+  }
+
+  void addTodoItem(Map<String, String> formValue) {
+    setState(
+      () {
+        unCompletedList.add(TodoItem(
+            id: unCompletedList.length + completedList.length,
+            title: formValue['title'] ?? '',
+            content: formValue['content'] ?? '',
+            isCompleted: false));
+      },
+    );
   }
 
   @override
@@ -65,7 +79,6 @@ class _TodoList extends State<TodoList> {
                     onChanged: (value) {
                       setState(
                         () {
-                          element.isCompleted = !element.isCompleted;
                           switchTodoItem(index);
                         },
                       );
@@ -73,10 +86,12 @@ class _TodoList extends State<TodoList> {
                 onTap: () => Navigator.of(context)
                     .push(MaterialPageRoute(builder: (context) {
                   return TodoDetail(
-                      index: index,
-                      title: element.title,
-                      content: element.content,
-                      isCompleted: element.isCompleted);
+                    index: index,
+                    title: element.title,
+                    content: element.content,
+                    isCompleted: element.isCompleted,
+                    switchTodoItem: switchTodoItem,
+                  );
                 })),
               );
             },
@@ -99,7 +114,9 @@ class _TodoList extends State<TodoList> {
       floatingActionButton: FloatingActionButton(
         onPressed: () =>
             Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-          return const TodoAdd();
+          return TodoAdd(
+            addTodoItem: addTodoItem,
+          );
         })),
         shape: const CircleBorder(),
         child: const Icon(Icons.add),

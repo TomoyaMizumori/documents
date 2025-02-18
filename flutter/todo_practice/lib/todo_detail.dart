@@ -5,8 +5,16 @@ class TodoDetail extends StatelessWidget {
   final String? title;
   final String? content;
   final bool? isCompleted;
-  const TodoDetail(
-      {super.key, this.index, this.title, this.content, this.isCompleted});
+  final void Function(int) switchTodoItem;
+
+  const TodoDetail({
+    super.key,
+    required this.index,
+    required this.title,
+    required this.content,
+    required this.isCompleted,
+    required this.switchTodoItem,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +55,10 @@ class TodoDetail extends StatelessWidget {
             ),
           ),
           ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                switchTodoItem(index!);
+                Navigator.of(context).pop();
+              },
               child: isCompleted! ? const Text('未完了にする') : const Text('完了にする'))
         ],
       )),
