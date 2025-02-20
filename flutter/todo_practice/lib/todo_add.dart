@@ -66,6 +66,8 @@ class _TodoAdd extends State<TodoAdd> {
                 ),
               ),
               ElevatedButton(
+                  style:
+                      ElevatedButton.styleFrom(fixedSize: const Size(400, 40)),
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
                       formKey.currentState?.save();
