@@ -68,28 +68,31 @@ class _TodoList extends State<TodoList> {
             itemCount: viewList.length,
             itemBuilder: (context, index) {
               final element = viewList[index];
-              return ListTile(
-                title: Text('${element.id + 1}  ${element.title}'),
-                trailing: Checkbox(
-                    activeColor: Colors.green,
-                    value: element.isCompleted,
-                    onChanged: (value) {
-                      setState(
-                        () {
-                          switchTodoItem(index);
-                        },
-                      );
-                    }),
-                onTap: () => Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) {
-                  return TodoDetail(
-                    index: index,
-                    title: element.title,
-                    content: element.content,
-                    isCompleted: element.isCompleted,
-                    switchTodoItem: switchTodoItem,
-                  );
-                })),
+              return Card(
+                child: ListTile(
+                  title: Text('${element.id + 1}  ${element.title}'),
+                  contentPadding: const EdgeInsets.all(8),
+                  trailing: Checkbox(
+                      activeColor: Colors.green,
+                      value: element.isCompleted,
+                      onChanged: (value) {
+                        setState(
+                          () {
+                            switchTodoItem(index);
+                          },
+                        );
+                      }),
+                  onTap: () => Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) {
+                    return TodoDetail(
+                      index: index,
+                      title: element.title,
+                      content: element.content,
+                      isCompleted: element.isCompleted,
+                      switchTodoItem: switchTodoItem,
+                    );
+                  })),
+                ),
               );
             },
           ))
