@@ -53,6 +53,7 @@ class TodoDetail extends StatelessWidget {
             ),
           ),
           ElevatedButton(
+              style: ElevatedButton.styleFrom(fixedSize: const Size(400, 40)),
               onPressed: () {
                 switchTodoItem(index!);
                 Navigator.of(context).pop();
