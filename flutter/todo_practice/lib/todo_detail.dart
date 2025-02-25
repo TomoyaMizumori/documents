@@ -56,7 +56,15 @@ class TodoDetail extends ConsumerWidget {
               },
               child: selectedTodoItem.isCompleted
                   ? const Text('未完了にする')
-                  : const Text('完了にする'))
+                  : const Text('完了にする')),
+          ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  fixedSize: const Size(400, 40), backgroundColor: Colors.red),
+              onPressed: () {
+                todo.deleteTodoItem(index!);
+                Navigator.of(context).pop();
+              },
+              child: const Text('削除する')),
         ],
       )),
     );

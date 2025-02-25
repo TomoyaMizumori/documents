@@ -19,6 +19,8 @@ class TodoListNotifier extends ChangeNotifier {
     TodoItem(id: 3, title: '免許', content: '免許更新', isCompleted: true),
   ];
 
+  final List<TodoItem> deletedList = [];
+
   void changeBottomIndex(int index) {
     bottomIndex = index;
     notifyListeners();
@@ -26,7 +28,7 @@ class TodoListNotifier extends ChangeNotifier {
 
   void addTodoItem(Map<String, String> formValue) {
     unCompletedList.add(TodoItem(
-        id: unCompletedList.length + completedList.length,
+        id: unCompletedList.length + completedList.length + deletedList.length,
         title: formValue['title'] ?? '',
         content: formValue['content'] ?? '',
         isCompleted: false));
@@ -52,6 +54,20 @@ class TodoListNotifier extends ChangeNotifier {
           content: selectedTodoItem.content,
           isCompleted: true));
     }
+    notifyListeners();
+  }
+
+  void deleteTodoItem(int index) {
+    final selectedTodoItem = viewList[index];
+
+    if (selectedTodoItem.isCompleted) {
+      completedList.removeAt(index);
+      deletedList.add(selectedTodoItem);
+    } else {
+      unCompletedList.removeAt(index);
+      deletedList.add(selectedTodoItem);
+    }
+
     notifyListeners();
   }
 }
