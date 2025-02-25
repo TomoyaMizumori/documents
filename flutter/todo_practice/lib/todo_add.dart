@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todo_practice/todo_providers.dart';
 
-class TodoAdd extends StatefulWidget {
-  final void Function(Map<String, String>) addTodoItem;
-  const TodoAdd({super.key, required this.addTodoItem});
+class TodoAdd extends ConsumerStatefulWidget {
+  const TodoAdd({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
-  State<TodoAdd> createState() => _TodoAdd();
+  ConsumerState<TodoAdd> createState() => _TodoAddState();
 }
 
-class _TodoAdd extends State<TodoAdd> {
+class _TodoAddState extends ConsumerState<TodoAdd> {
   final formKey = GlobalKey<FormState>();
 
   Map<String, String> formValue = {};
@@ -71,7 +71,7 @@ class _TodoAdd extends State<TodoAdd> {
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
                       formKey.currentState?.save();
-                      widget.addTodoItem(formValue);
+                      ref.read(todoProvider).addTodoItem(formValue);
                       Navigator.of(context).pop();
                     }
                   },

@@ -1,25 +1,19 @@
 import 'package:flutter/material.dart';
 // ignore: unused_import
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todo_practice/todo_providers.dart';
 
-class TodoDetail extends StatelessWidget {
+class TodoDetail extends ConsumerWidget {
   final int? index;
-  final String? title;
-  final String? content;
-  final bool? isCompleted;
-  final void Function(int) switchTodoItem;
-
   const TodoDetail({
     super.key,
     required this.index,
-    required this.title,
-    required this.content,
-    required this.isCompleted,
-    required this.switchTodoItem,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final todo = ref.watch(todoProvider);
+    final selectedTodoItem = todo.viewList[index!];
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -37,7 +31,7 @@ class TodoDetail extends StatelessWidget {
                 border: OutlineInputBorder(),
                 labelText: 'タイトル',
               ),
-              initialValue: title,
+              initialValue: selectedTodoItem.title,
               onSaved: (value) => {},
               readOnly: true,
             ),
@@ -49,7 +43,7 @@ class TodoDetail extends StatelessWidget {
                 border: OutlineInputBorder(),
                 labelText: '内容',
               ),
-              initialValue: content,
+              initialValue: selectedTodoItem.content,
               onSaved: (value) => {},
               readOnly: true,
             ),
@@ -57,10 +51,12 @@ class TodoDetail extends StatelessWidget {
           ElevatedButton(
               style: ElevatedButton.styleFrom(fixedSize: const Size(400, 40)),
               onPressed: () {
-                switchTodoItem(index!);
+                todo.replaceTodoItem(index!);
                 Navigator.of(context).pop();
               },
-              child: isCompleted! ? const Text('未完了にする') : const Text('完了にする'))
+              child: selectedTodoItem.isCompleted
+                  ? const Text('未完了にする')
+                  : const Text('完了にする'))
         ],
       )),
     );
