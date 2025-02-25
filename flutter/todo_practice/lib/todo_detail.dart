@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_practice/todo_providers.dart';
 
 class TodoDetail extends ConsumerWidget {
-  final int? index;
+  final int index;
   const TodoDetail({
     super.key,
     required this.index,
@@ -12,8 +12,7 @@ class TodoDetail extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final todo = ref.watch(todoProvider);
-    final selectedTodoItem = todo.viewList[index!];
+    final todo = ref.read(todoProvider).viewList[index];
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -31,7 +30,7 @@ class TodoDetail extends ConsumerWidget {
                 border: OutlineInputBorder(),
                 labelText: 'タイトル',
               ),
-              initialValue: selectedTodoItem.title,
+              initialValue: todo.title,
               onSaved: (value) => {},
               readOnly: true,
             ),
@@ -43,7 +42,7 @@ class TodoDetail extends ConsumerWidget {
                 border: OutlineInputBorder(),
                 labelText: '内容',
               ),
-              initialValue: selectedTodoItem.content,
+              initialValue: todo.content,
               onSaved: (value) => {},
               readOnly: true,
             ),
@@ -51,17 +50,17 @@ class TodoDetail extends ConsumerWidget {
           ElevatedButton(
               style: ElevatedButton.styleFrom(fixedSize: const Size(400, 40)),
               onPressed: () {
-                todo.replaceTodoItem(index!);
+                ref.read(todoProvider).replaceTodoItem(index);
                 Navigator.of(context).pop();
               },
-              child: selectedTodoItem.isCompleted
+              child: todo.isCompleted
                   ? const Text('未完了にする')
                   : const Text('完了にする')),
           ElevatedButton(
               style: ElevatedButton.styleFrom(
                   fixedSize: const Size(400, 40), backgroundColor: Colors.red),
               onPressed: () {
-                todo.deleteTodoItem(index!);
+                ref.read(todoProvider).deleteTodoItem(index);
                 Navigator.of(context).pop();
               },
               child: const Text('削除する')),
