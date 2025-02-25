@@ -1,0 +1,21 @@
+{
+  "configVersion": 2,
+  "packages": [
+    {
+      "name": "email_validator",
+      "rootUri": "file:///Users/mizumoritomoya/.pub-cache/hosted/pub.dev/email_validator-2.1.17",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "demo",
+      "rootUri": "../",
+      "packageUri": "lib/",
+      "languageVersion": "2.16"
+    }
+  ],
+  "generated": "2025-02-10T10:55:10.068483Z",
+  "generator": "pub",
+  "generatorVersion": "3.6.2",
+  "pubCache": "file:///Users/mizumoritomoya/.pub-cache"
+}

@@ -1,0 +1,7 @@
+name: demo
+
+environment:
+    sdk: ">=2.16.2 <3.0.0"
+
+dependencies: # ここに利用するパッケージを追記していく
+    email_validator: ^2.0.1 # 追加 コピーした部分
