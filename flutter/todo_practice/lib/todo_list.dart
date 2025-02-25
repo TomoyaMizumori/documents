@@ -21,29 +21,39 @@ class TodoListView extends ConsumerWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Expanded(
-              child: ListView.builder(
-            itemCount: todo.viewList.length,
-            itemBuilder: (context, index) {
-              final element = todo.viewList[index];
-              return Card(
-                child: ListTile(
-                  title: Text('${element.id + 1}  ${element.title}'),
-                  contentPadding: const EdgeInsets.all(8),
-                  trailing: Checkbox(
-                      activeColor: Colors.green,
-                      value: element.isCompleted,
-                      onChanged: (value) {
-                        todo.replaceTodoItem(index);
-                      }),
-                  onTap: () => Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) {
-                    return ProviderScope(child: TodoDetail(index: index));
-                  })),
-                ),
-              );
-            },
-          ))
+          todo.viewList.isEmpty && todo.bottomIndex == 0
+              ? const SizedBox(
+                  width: double.infinity,
+                  child: Column(
+                    children: [
+                      Text('全てのタスクを完了しました！'),
+                      Icon(Icons.thumb_up_alt)
+                    ],
+                  ),
+                )
+              : Expanded(
+                  child: ListView.builder(
+                  itemCount: todo.viewList.length,
+                  itemBuilder: (context, index) {
+                    final element = todo.viewList[index];
+                    return Card(
+                      child: ListTile(
+                        title: Text('${element.id + 1}  ${element.title}'),
+                        contentPadding: const EdgeInsets.all(8),
+                        trailing: Checkbox(
+                            activeColor: Colors.green,
+                            value: element.isCompleted,
+                            onChanged: (value) {
+                              todo.replaceTodoItem(index);
+                            }),
+                        onTap: () => Navigator.of(context)
+                            .push(MaterialPageRoute(builder: (context) {
+                          return ProviderScope(child: TodoDetail(index: index));
+                        })),
+                      ),
+                    );
+                  },
+                ))
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
