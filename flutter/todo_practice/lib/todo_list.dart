@@ -10,6 +10,8 @@ class TodoListView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final todo = ref.watch(todoProvider);
+    todo.unCompletedList.sort((a, b) => a.id.compareTo(b.id));
+    todo.completedList.sort((a, b) => a.id.compareTo(b.id));
     return Scaffold(
       appBar: AppBar(
         title: Text(
